@@ -29,7 +29,7 @@ class VoiceGeneratorUI:
         self.root = root
         self.root.title("语音生成器")
         self.root.geometry("600x400")
-        self.setup_ffmpeg_path()
+        
         # 创建主框架
         main_frame = ttk.Frame(root, padding="10")
         main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
@@ -90,7 +90,7 @@ class VoiceGeneratorUI:
         # 状态标签
         self.status_label = ttk.Label(main_frame, text="")
         self.status_label.grid(row=6, column=0, columnspan=3)
-        
+        self.setup_ffmpeg_path()
         # 调整 macOS 上的界面样式
         if platform.system() == "Darwin":
             self.root.tk.call('tk', 'scaling', 2.0)  # 调整 macOS 上的界面缩放
@@ -102,10 +102,10 @@ class VoiceGeneratorUI:
         ttk.Label(main_frame, text="MP3转WAV功能:").grid(row=8, column=0, sticky=tk.W)
         self.convert_btn = ttk.Button(main_frame, text="转换MP3为WAV", command=self.convert_to_wav)
         self.convert_btn.grid(row=8, column=1, pady=10)
-        
-        # 转换状态标签
+        # 添加转换状态标签
         self.convert_status_label = ttk.Label(main_frame, text="")
-        self.convert_status_label.grid(row=9, column=0, columnspan=3)
+        self.convert_status_label.grid(row=9, column=0, columnspan=3, pady=5)
+
         self.output_dir.insert(0, default_output)
     
     def setup_ffmpeg_path(self):
